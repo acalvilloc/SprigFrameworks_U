@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" > </link>
 </head>
 <body>
-<h1> Hola quiobo</h1>
+<h1 class="color-rojo" th:text="${titulo}"></h1>
+<h2 class="color-azul">Subtítulo con color azul</h2>
+<img alt="" th:src="@{/images/Chari.png}"></img>
 </body>
 </html>

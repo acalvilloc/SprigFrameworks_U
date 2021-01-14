@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Recibir parámetros del REQUEST HTTP GET - URL</title>
+</head>
+<body>
+<h1>Recibir parámetros del REQUEST HTTP GET - URL</h1>
+<li>
+<a th:href="@{/params/string(texto = 'Holi crayoli')}">/params/string?texto="Holi crayoli"</a>
+</li>
+<li>
+<a th:href="@{/params/string(texto = 'Holi quibo')}">/params/string?texto="Quibo"</a>
+</li>
+<li>
+<a th:href="@{/params/string(texto = 'YEYEYEYE')}">/params/string?texto="YEYEYEYE"</a>
+</li>
+
+<h2>Varios </h2>
+<h3>Decoradores </h3>
+<li>
+<a th:href="@{/params/mix-params(saludo = 'Quioobo raza', numero =31416)}">/params/mix-params?Saludo=quibo raza&numero=31416 </a>
+</li>
+<h3> HttpServlet</h3>
+<li>
+<a th:href="@{/params/mix-params-request(saludo = 'Quioobo raza', numero =31416)}">/params/mix-params-request?Saludo=quibo raza&numero=31416 </a>
+</li>
+</body>
+</html>
