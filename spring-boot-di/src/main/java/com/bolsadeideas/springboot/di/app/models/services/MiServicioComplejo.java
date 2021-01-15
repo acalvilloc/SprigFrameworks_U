@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 
 
 @Controller("ServicioComplejo")
-@Primary
 public class MiServicioComplejo implements IServicio {
 
 	@Override
