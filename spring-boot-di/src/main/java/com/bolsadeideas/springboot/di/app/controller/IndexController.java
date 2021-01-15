@@ -7,15 +7,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bolsadeideas.springboot.di.app.models.services.IServicio;
 
-@Controller
+@Controller()
 public class IndexController {
 
 	//1: Acoplado, sin inyección de dependencias
 	//private MiServicio s = new MiServicio();
-	
-	//2: DI
+
+	//Inyección en atributo
 	@Autowired
 	private IServicio s;
+
+	//Inyección por constructor, la anotación se puede omitir
+	/*@Autowired
+	public IndexController(IServicio s) {
+		this.s=s;
+	}
+	*/
+	
+	//2: DI
 	@GetMapping({"/index", "/", ""})
 	public String index(Model model) {
 		//1
@@ -23,5 +32,14 @@ public class IndexController {
 		return "index";
 	}
 	
-	
+	public IServicio getS() {
+		return s;
+	}
+
+	/* Inyección mediante set
+	@Autowired
+	public void setS(IServicio s) {
+		this.s = s;
+	}
+	*/
 }
