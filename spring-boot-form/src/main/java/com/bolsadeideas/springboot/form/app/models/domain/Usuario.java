@@ -1,13 +1,16 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class Usuario {
 
-	
+	//@Pattern(regexp = "[0-9]{2}[.,][\\d]{3}[.,][\\d]{3}[-][A-Z]{1}")
 	private String identificador;
 	
-	@NotEmpty
+	//@NotEmpty
 	private String nombre;
 	
 	@NotEmpty
@@ -16,8 +19,10 @@ public class Usuario {
 	@NotEmpty
 	private String username;
 	@NotEmpty
+	@Size(min = 3, max=8)
 	private String pass;
 	@NotEmpty
+	@Email
 	private String email;
 	
 	public String getEmail() {

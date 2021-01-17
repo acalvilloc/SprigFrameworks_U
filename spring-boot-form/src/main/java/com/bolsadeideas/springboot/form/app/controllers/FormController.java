@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,18 +17,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.form.app.models.domain.Usuario;
+import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
 @Controller
 @SessionAttributes("usuario")
 public class FormController {
 	
+	@Autowired
+	private UsuarioValidador usval;
 	
 	@GetMapping("/form")
 	public String form (Model model) {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("Rodolfo");
 		usuario.setApellido("Madrid");
-		usuario.setIdentificador("159702");
+		usuario.setIdentificador("15.970.222-A");
 		model.addAttribute("titulo","Formulario de usuarios");
 		model.addAttribute("usuario",usuario);
 		return	"form";
@@ -41,6 +46,7 @@ public class FormController {
 			SessionStatus status
 			) {
 	
+		usval.validate(usuario, result);
 		model.addAttribute("titulo","Resultado del formulario");
 		if(result.hasErrors()) {
 			/*
