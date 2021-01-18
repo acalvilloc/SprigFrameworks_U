@@ -17,12 +17,12 @@ public class UsuarioValidador implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Usuario usuario = (Usuario)target;
+		//Usuario usuario = (Usuario)target;
 		
-		ValidationUtils.rejectIfEmpty(errors,"nombre", "NotEmpty.usuario.nombre");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"nombre", "NotEmpty.usuario.nombre");
 
-		if(usuario.getIdentificador().matches("[0-9]{2}[.,][\\d]{3}[.,][\\d]{3}[-][A-Z]{1}") == false)
-			errors.rejectValue("identificador", "pattern.usuario.identificador");
+		//if(usuario.getIdentificador().matches("[0-9]{2}[.,][\\d]{3}[.,][\\d]{3}[-][A-Z]{1}") == false)
+		//	errors.rejectValue("identificador", "pattern.usuario.identificador");
 	}
 
 }
