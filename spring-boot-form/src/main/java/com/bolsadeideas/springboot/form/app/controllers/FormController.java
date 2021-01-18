@@ -1,8 +1,10 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -42,6 +45,12 @@ public class FormController {
 		binder.registerCustomEditor(String.class,"apellido" ,new NombreMayusculaEditor());
 		
 	}
+	
+	@ModelAttribute("paises")
+	public List<String> paises(){
+		return Arrays.asList("España","México","Chile","Argentina","Perú");
+	}
+	
 	@GetMapping("/form")
 	public String form (Model model) {
 		Usuario usuario = new Usuario();

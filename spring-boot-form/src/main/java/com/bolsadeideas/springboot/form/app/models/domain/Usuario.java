@@ -49,6 +49,16 @@ public class Usuario {
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
 	
+	@NotEmpty
+	private String pais;
+	
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
