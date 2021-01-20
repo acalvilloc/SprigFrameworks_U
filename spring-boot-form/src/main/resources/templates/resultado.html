@@ -6,6 +6,10 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
 </head>
 <body>
+
+	<div class="alert alert-success">
+	<span th:text="'Tiempo transcurrido: ' + ${tiempoTranscurrido} + ' milisegundos'"></span>
+	</div>
 	<div class="container my-3">
 	<a th:href="@{/form}" class="btn btn-success my-3">Volver</a>
 	<ul class="list-group">
