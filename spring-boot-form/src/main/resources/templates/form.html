@@ -8,6 +8,20 @@
 <h3 th:text="${titulo}"></h3>
 	<form th:action="@{/form}" method="post" th:object="${usuario}">
 		<div>
+			<label for="habilitar">Habilitar</label>
+			<div>
+				<input type="checkbox" id="habilitar" th:field="*{habilitar}">
+			</div>
+		</div>
+		<div>
+			<label for="genero">Genero</label>
+			<div th:each="genero: ${genero}">
+				<input type="radio" th:field="*{genero}" th:value="${genero}">
+				<label th:for="${#ids.prev('genero')}" th:text="${genero}"></label>
+			</div>
+		</div>
+		<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+		<div>
 			<label for="pais">País</label>
 			<div>
 				<select id="pais" th:field="*{pais}">
@@ -20,7 +34,8 @@
 		<div>
 			<label for="roles">Roles</label>
 			<div th:each="role: ${listaRoles}">
-				<input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+				th:checked="${#lists.contains(usuario.roles,role)}">
 				<label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
 			</div>
 		</div>
@@ -82,11 +97,13 @@
 			</div>
 		</div>
 		<div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" ></div>
+
 		<div>
 			<div>
 				<input type="submit" value="Enviar">
 			</div>
 		</div>
+		<input type="hidden" th:field="*{valorSecreto}">
 		
 	</form>
 </body>

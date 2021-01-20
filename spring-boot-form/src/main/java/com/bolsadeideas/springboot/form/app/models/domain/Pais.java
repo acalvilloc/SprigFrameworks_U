@@ -9,6 +9,11 @@ public class Pais {
 	private String codigo;
 	private String nombre;
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.id.toString();
+	}	
 	public Pais() {
 		// TODO Auto-generated constructor stub
 	}

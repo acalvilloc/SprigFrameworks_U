@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -66,6 +67,10 @@ public class FormController {
 		
 	}
 	
+	@ModelAttribute("genero")
+	public List<String> genero(){
+		return Arrays.asList("Hombre","Mujer","Sin Especificar");
+	}
 	@ModelAttribute("listaRoles")
 	public List<Role>listaRoles(){
 		return this.roleService.listar();
@@ -115,6 +120,10 @@ public class FormController {
 		usuario.setNombre("Rodolfo");
 		usuario.setApellido("Madrid");
 		usuario.setIdentificador("15.970.222-A");
+		usuario.setHabilitar(true);
+		usuario.setValorSecreto("Algún valor secretoso ******");
+		usuario.setPais(new Pais(2,"MX","México"));
+		usuario.setRoles(Arrays.asList(new Role(2,"Usuario","ROLE_USER")));
 		model.addAttribute("titulo","Formulario de usuarios");
 		model.addAttribute("usuario",usuario);
 		return	"form";
@@ -129,22 +138,21 @@ public class FormController {
 			SessionStatus status
 			) {
 	
-		//usval.validate(usuario, result);
-		model.addAttribute("titulo","Resultado del formulario");
+	
 		if(result.hasErrors()) {
-			/*
-			Map<String, String> errores = new HashMap();
-			result.getFieldErrors().forEach(err ->
-			errores.put(err.getField(), "El campo ".concat(err.getField().concat(" " ).concat(err.getDefaultMessage()))));
-			model.addAttribute("error", errores);
-			*/
+			model.addAttribute("titulo","Resultado del formulario");
 			return "form";
 		}
-		model.addAttribute("usuario",usuario);
+		return "redirect:/ver";
+	}
+	
+	@GetMapping("/ver")
+	public String ver(@SessionAttribute(name="usuario",required=false)Usuario usuario, Model model,SessionStatus status) {
+		if(usuario == null)
+			return "redirect:/form";
+		
+		model.addAttribute("titulo","Resultado del formulario");
 		status.setComplete();
-		//model.addAttribute("username",username);
-		//model.addAttribute("pass",pass);
-		//model.addAttribute("email",email);
 		return "resultado";
 	}
 
