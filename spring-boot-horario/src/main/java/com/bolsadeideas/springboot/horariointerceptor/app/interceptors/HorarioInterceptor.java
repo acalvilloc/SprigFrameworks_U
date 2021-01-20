@@ -43,6 +43,7 @@ public class HorarioInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		String mensaje = (String) request.getAttribute("mensaje");
+		
 		if(modelAndView!=null)
 			modelAndView.addObject("horario",mensaje);
 		
