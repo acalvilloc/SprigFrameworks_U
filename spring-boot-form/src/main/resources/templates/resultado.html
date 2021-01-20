@@ -8,7 +8,9 @@
 <h3 th:text="${titulo}"></h3>
 	
 	<ul>
-	<li th:text="${usuario.pais}"> </li>
+	<li th:text="${usuario.pais.id}"> </li>
+	<li th:text="${usuario.pais.codigo}"> </li>
+	<li th:text="${usuario.pais.nombre}"> </li>
 	<li th:text="${usuario.identificador}"> </li>
 	<li th:text="${usuario.nombre}"> </li>
 	<li th:text="${usuario.apellido}"> </li>
@@ -17,6 +19,11 @@
 	<li th:text="${usuario.email}"> </li>
 	<li th:text="${usuario.cuenta}"> </li>
 	<li th:text="${#dates.format(usuario.fechaNacimiento,'dd/MM/yyyy')}"> </li>
+	</ul>
+	
+	<div>Roles</div>
+	<ul>
+	<li th:each="role: ${usuario.roles}" th:text="${role.id} ' --'${role.role} + ' : ' + ${role.nombre}"> </li>
 	</ul>
 </body>
 </html>
