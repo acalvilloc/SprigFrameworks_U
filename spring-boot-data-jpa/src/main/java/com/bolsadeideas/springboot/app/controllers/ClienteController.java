@@ -18,18 +18,19 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
+import com.bolsadeideas.springboot.app.models.services.IClienteService;
 
 @Controller
 @SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired
-	private IClienteDao clienteDao;
+	private IClienteService clienteS;
 	
 	@RequestMapping(value = "/listar",method = RequestMethod.GET)
 	public String listar (Model model) {
 		model.addAttribute("titulo", "listado de clientes: ");
-		model.addAttribute("clientes", clienteDao.findAll());
+		model.addAttribute("clientes", clienteS.findAll());
 		return "listar";
 	}
 	
@@ -47,7 +48,7 @@ public class ClienteController {
 		Cliente cliente = null;
 		
 		if(id>0) {
-			cliente = clienteDao.findOne(id);
+			cliente = clienteS.findOne(id);
 		}
 		else
 		{
@@ -63,7 +64,7 @@ public class ClienteController {
 			model.addAttribute("titulo", "Formulario del cliente");
 			return "form";
 		}
-		clienteDao.save(cliente);
+		clienteS.save(cliente);
 		status.setComplete();
 		return "redirect:listar";
 	}
@@ -73,7 +74,7 @@ public class ClienteController {
 		
 		if(id>0)
 			{
-			clienteDao.delete(id);
+			clienteS.delete(id);
 			}
 		return "redirect:/listar";
 	}
