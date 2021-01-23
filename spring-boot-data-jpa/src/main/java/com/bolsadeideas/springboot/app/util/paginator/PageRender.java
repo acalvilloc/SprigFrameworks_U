@@ -13,7 +13,7 @@ public class PageRender<T> {
 	
 	private int totalPaginas;
 	private int numElementosPP;
-	private int pagAc;
+	private int paginaActual;
 	
 	private List<PageItem> paginas;
 	
@@ -23,26 +23,26 @@ public class PageRender<T> {
 		this.paginas= new ArrayList<PageItem>();
 		this.numElementosPP = page.getSize();
 		this.totalPaginas= page.getTotalPages();
-		this.pagAc=page.getNumber() + 1;
+		this.paginaActual=page.getNumber() + 1;
 		int desde, hasta;
 		if (totalPaginas<= numElementosPP) {
 			desde=1;
 			hasta=totalPaginas;
 		}else
-			if(pagAc<=numElementosPP/2){
+			if(paginaActual<=numElementosPP/2){
 				desde= 1 ;
 				hasta = numElementosPP;
-			}else if(pagAc >= totalPaginas - numElementosPP/2){
+			}else if(paginaActual >= totalPaginas - numElementosPP/2){
 				desde=totalPaginas-numElementosPP+1;
 				hasta=numElementosPP;
 			}else
 			{
-				desde=pagAc - numElementosPP/2;
+				desde=paginaActual - numElementosPP/2;
 				hasta= numElementosPP;
 			}
 		
 		for (int i = 0 ; i<= hasta; i++) {
-			paginas.add(new PageItem(desde + i , pagAc == 	desde));
+			paginas.add(new PageItem(desde + i , paginaActual == 	desde));
 			
 		}	
 		
@@ -62,8 +62,8 @@ public class PageRender<T> {
 		return totalPaginas;
 	}
 
-	public int getPagAc() {
-		return pagAc;
+	public int getPaginaActual() {
+		return paginaActual;
 	}
 
 	public List<PageItem> getPaginas() {

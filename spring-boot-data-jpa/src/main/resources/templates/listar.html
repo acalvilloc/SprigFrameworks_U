@@ -12,7 +12,8 @@
 			<div class="card.body">
 
 				<h1 class="text-primary border border-success" th:text="${titulo}"></h1>
-				<a th:href="@{/form}" class="btn btn-primary btn-xs"> Crear cliente</a>
+				<a th:href="@{/form}" class="btn btn-primary btn-xs"> Crear
+					cliente</a>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -27,11 +28,15 @@
 					</thead>
 					<tbody>
 						<tr th:each="cliente : ${clientes}">
-							<td th:text="${cliente.id}"></td>
+							<td><a th:href="@{/ver/}+${cliente.id}"
+								th:text="${cliente.id}" class="btn btn-primary btn-xs"></a></td>
 							<td th:text="${cliente.nombre}"></td>
 							<td th:text="${cliente.apellido}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.create_at}"></td>
+							<td><a class="btn btn-success btn-sm"
+								th:href="@{'/factura/form/' + ${cliente.id}}"
+								th:text="'crear factura'"></a></td>
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/form/} + ${cliente.id}" th:text="'Modificar'"></a></td>
 							<td><a class="btn btn-primary btn-xs"
@@ -40,7 +45,7 @@
 						</tr>
 					</tbody>
 				</table>
-								<nav th:replace="paginator-nav :: paginator"></nav>
+				<nav th:replace="paginator-nav :: paginator"></nav>
 			</div>
 		</div>
 	</div>
